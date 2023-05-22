@@ -18,7 +18,7 @@
 
         <label>Parents</label>
 
- 
+
 
         <select name="parents" class="form-control">
 
@@ -31,6 +31,32 @@
 
                 echo '<option value="' . $pure . '">' . $p->db[$pure]['title'] . '</option>';
             }; ?>
+
+        </select>
+
+
+        <?php
+
+        $dbs = new Categories();
+
+
+
+
+        ?>
+
+        <br>
+        <label>Categories</label>
+        <select name="categories" class="form-control">
+
+            <option value="">None</option>
+
+
+            <?php foreach ($dbs->db as $cat) {
+
+
+                echo '<option value="' . $cat['name'] . '">' . $cat['name'] . '</option>';
+            }; ?>
+
 
         </select>
 

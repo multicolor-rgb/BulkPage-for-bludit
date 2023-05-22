@@ -22,6 +22,7 @@ class BulkPage extends Plugin
 					$arg['content'] = $_POST['content'];
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
+					$arg['category'] = $_POST['categories'];
 					createPage($arg);
 				};
 
