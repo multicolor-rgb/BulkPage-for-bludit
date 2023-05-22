@@ -145,7 +145,4 @@
 </script>
 
 
-<? if ($_GET['success']) {
-
-    echo '<div id="alert" class="alert alert-success">Done</div>';
-}; ?>
+ 
