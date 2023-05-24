@@ -23,8 +23,21 @@ class BulkPage extends Plugin
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
 					$arg['category'] = $_POST['categories'];
+
+					global $pages;
+
+
+					foreach ($pages->db as $key => $value) {
+
+						if ($value['title'] == $arg['title']) {
+							deletePage($key);
+						};
+					};
+
 					createPage($arg);
 				};
+
+
 
 				Alert::set('Pages added', ALERT_STATUS_OK);
 			};
