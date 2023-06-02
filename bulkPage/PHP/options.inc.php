@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo DOMAIN_BASE; ?>bl-plugins/tinymce/css/tinymce_toolbar.css">
 <script src="<?php echo DOMAIN_BASE; ?>bl-plugins/tinymce/tinymce/tinymce.min.js?version=5.10.5"></script>
 
+ 
+
 <form method="POST">
 
     <select name="option" class="form-control mb-2">
@@ -141,8 +143,8 @@
             document.querySelector('.ifpages').classList.remove('d-none');
         }
 
-    })
+    });
+
+
+    
 </script>
-
-
- 

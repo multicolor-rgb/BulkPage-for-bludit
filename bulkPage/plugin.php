@@ -12,21 +12,70 @@ class BulkPage extends Plugin
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			$list = explode(",", $_POST['list']);
+			$removedDuplicate = array_unique($list);
 
 
 			if ($_POST['option'] == 'pages') {
-				foreach ($list as $key => $value) {
+
+				foreach ($removedDuplicate  as $key => $value) {
 					$arg = [];
-					$arg['title'] = $value;
+
+					if ($value[0] == ' ') {
+						$arg['title'] = substr($value, 0);
+					} else {
+						$arg['title'] =  $value;
+					};
+
+					if ($value == '') {
+						$arg['title'] = 'no-title';
+					};
+
+
+
+
 					$arg['tags'] = $_POST['tags'];
 					$arg['content'] = $_POST['content'];
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
 					$arg['category'] = $_POST['categories'];
-					createPage($arg);
-				};
 
-				Alert::set('Pages added', ALERT_STATUS_OK);
+					global $pages;
+
+
+					$titleList = array();
+
+					foreach ($pages->db as $key => $value) {
+						array_push($titleList, $value['title']);
+					};
+
+
+
+					if (in_array($arg['title'], $titleList)) {
+						echo '<div class="alert alpage alert-danger">Page with title ' . $arg['title'] . ' exist!</div>';
+					} elseif ($arg['title'] == 'no-title') {
+						echo '<div class="alert alpage alert-danger">Page empty!</div>';
+					} else {
+						createPage($arg);
+						Alert::set('Pages added', ALERT_STATUS_OK);
+					};
+
+
+					echo '<script>
+					
+					setTimeout(()=>{
+
+					if(document.querySelector(".alpage")!==null){
+
+					document.querySelectorAll(".alpage").forEach(x=>{
+					x.classList.add("d-none");
+					})
+				
+					};
+
+				},1500);
+					
+					</script>';
+				};
 			};
 
 
