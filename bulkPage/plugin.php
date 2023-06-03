@@ -11,6 +11,7 @@ class BulkPage extends Plugin
 		// Check if the form was sent
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+			set_time_limit(0);
 			$list = explode(",", $_POST['list']);
 			$removedDuplicate = array_unique($list);
 

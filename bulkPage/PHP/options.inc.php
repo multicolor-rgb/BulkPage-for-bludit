@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo DOMAIN_BASE; ?>bl-plugins/tinymce/css/tinymce_toolbar.css">
 <script src="<?php echo DOMAIN_BASE; ?>bl-plugins/tinymce/tinymce/tinymce.min.js?version=5.10.5"></script>
 
- 
+
 
 <form method="POST">
 
@@ -22,16 +22,23 @@
 
 
 
+        <?php
+
+        $p = new Pages();
+
+       
+        ?>
+
+
         <select name="parents" class="form-control">
 
             <option value="">None</option>
 
-            <?php foreach (glob(PATH_PAGES . '/*', GLOB_ONLYDIR) as $page) {
+            <?php foreach ($p->db as  $value) {
 
-                $pure = pathinfo($page)['filename'];
-                $p = new Pages();
+               
 
-                echo '<option value="' . $pure . '">' . $p->db[$pure]['title'] . '</option>';
+                echo '<option value="' .  $value['title'] . '">' . $value['title'] . '</option>';
             }; ?>
 
         </select>
@@ -144,7 +151,4 @@
         }
 
     });
-
-
-    
 </script>
