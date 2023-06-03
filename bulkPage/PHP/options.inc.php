@@ -16,18 +16,23 @@
     <input type="hidden" id="jstokenCSRF" name="tokenCSRF" value="<?php echo $tokenCSRF; ?>">
 
     <textarea class="form-control" name="list" placeholder="example1, example2, example3"></textarea>
+
+
+
+    <?php
+
+    $p = new Pages();
+
+    echo '<div class="bg-light border  p-2 my-2">Pages on Bludit :' . count($p->db).'</div>';
+
+
+    ?>
+
     <div class="ifpages bg-light border mt-2 p-3">
 
         <label>Parents</label>
 
 
-
-        <?php
-
-        $p = new Pages();
-
-       
-        ?>
 
 
         <select name="parents" class="form-control">
@@ -36,7 +41,7 @@
 
             <?php foreach ($p->db as  $value) {
 
-               
+
 
                 echo '<option value="' .  $value['title'] . '">' . $value['title'] . '</option>';
             }; ?>
