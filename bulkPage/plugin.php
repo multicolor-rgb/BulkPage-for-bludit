@@ -34,7 +34,13 @@ class BulkPage extends Plugin
 
 
 
-					$arg['tags'] = $_POST['tags'];
+					if ($_POST['autotags'] !== 'true') {
+						$arg['tags'] = $_POST['tags'];
+					} else {
+						$arrayFromTitle = explode(' ',$value);
+						$arg['tags'] = implode(',', $arrayFromTitle);
+					};
+
 					$arg['content'] = $_POST['content'];
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
@@ -115,6 +121,6 @@ class BulkPage extends Plugin
 
 	public function adminBodyEnd()
 	{
-		 include $this->phpPath().'PHP/script.php';
+		include $this->phpPath() . 'PHP/script.php';
 	}
 }

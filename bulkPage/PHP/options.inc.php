@@ -25,7 +25,7 @@
 
     print_r($p->db['title']);
 
-    echo '<div class="bg-light border  p-2 my-2">Pages on Bludit :' . count($p->db).'</div>';
+    echo '<div class="bg-light border  p-2 my-2">Pages on Bludit :' . count($p->db) . '</div>';
 
 
     ?>
@@ -42,7 +42,7 @@
             <option value="">None</option>
 
             <?php foreach ($p->db as  $index => $value) {
-                echo '<option value="' .  $index. '">' . $value['title'] . '</option>';
+                echo '<option value="' .  $index . '">' . $value['title'] . '</option>';
             }; ?>
 
         </select>
@@ -75,6 +75,10 @@
 
 
         <br>
+
+        <label for="">Autotags? (grab words from titlle) <input type="checkbox" name="autotags" value="true"></label>
+        <br>
+
         <label for="tags">Tags</label>
         <input type="text" class="form-control" name="tags">
         <br>
