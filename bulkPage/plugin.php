@@ -111,4 +111,10 @@ class BulkPage extends Plugin
 		$html = '<a id="current-version" class="nav-link" href="' . $url . '">✔️BulkPage settings</a>';
 		return $html;
 	}
+
+
+	public function adminBodyEnd()
+	{
+		 include $this->phpPath().'PHP/script.php';
+	}
 }
