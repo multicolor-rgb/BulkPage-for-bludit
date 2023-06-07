@@ -23,6 +23,8 @@
 
     $p = new Pages();
 
+    print_r($p->db['title']);
+
     echo '<div class="bg-light border  p-2 my-2">Pages on Bludit :' . count($p->db).'</div>';
 
 
@@ -39,11 +41,8 @@
 
             <option value="">None</option>
 
-            <?php foreach ($p->db as  $value) {
-
-
-
-                echo '<option value="' .  $value['title'] . '">' . $value['title'] . '</option>';
+            <?php foreach ($p->db as  $index => $value) {
+                echo '<option value="' .  $index. '">' . $value['title'] . '</option>';
             }; ?>
 
         </select>
