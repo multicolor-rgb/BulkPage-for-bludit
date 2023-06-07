@@ -1,6 +1,4 @@
-<?php
-
-define('ITEMS_PER_PAGE_ADMIN', 30000000000);; ?>
+ 
 
 <script>
     if (document.querySelector('#static') != null) {
