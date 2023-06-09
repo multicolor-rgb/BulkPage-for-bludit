@@ -34,10 +34,10 @@ class BulkPage extends Plugin
 
 
 
-					if ($_POST['autotags'] !== 'true') {
+					if (@$_POST['autotags'] !== 'true') {
 						$arg['tags'] = $_POST['tags'];
 					} else {
-						$arrayFromTitle = explode(' ',$value);
+						$arrayFromTitle = explode(' ', $value);
 						$arg['tags'] = implode(',', $arrayFromTitle);
 					};
 
@@ -63,6 +63,7 @@ class BulkPage extends Plugin
 						echo '<div class="alert alpage alert-danger">Page empty!</div>';
 					} else {
 						createPage($arg);
+
 						Alert::set('Pages added', ALERT_STATUS_OK);
 					};
 
@@ -106,7 +107,6 @@ class BulkPage extends Plugin
 		global $site;
 		$title = $site->title();
 
-
 		include($this->phpPath() . 'PHP/options.inc.php');
 	}
 
@@ -114,6 +114,7 @@ class BulkPage extends Plugin
 	{
 		$pluginName = Text::lowercase(__CLASS__);
 		$url = HTML_PATH_ADMIN_ROOT . 'plugin/' . $pluginName;
+		$url2 = HTML_PATH_ADMIN_ROOT . 'plugin/' . $pluginName . '?&content';
 		$html = '<a id="current-version" class="nav-link" href="' . $url . '">✔️BulkPage settings</a>';
 		return $html;
 	}

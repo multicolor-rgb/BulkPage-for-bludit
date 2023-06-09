@@ -23,7 +23,7 @@
 
     $p = new Pages();
 
-    print_r($p->db['title']);
+
 
     echo '<div class="bg-light border  p-2 my-2">Pages on Bludit :' . count($p->db) . '</div>';
 
