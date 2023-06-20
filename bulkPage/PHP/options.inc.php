@@ -103,6 +103,8 @@
 </form>
 
 
+
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="box-sizing:border-box;display:grid; width:100%;grid-template-columns:1fr auto; padding:10px;background:#fafafa;border:solid 1px #ddd;margin-top:20px;">
     <p style="margin:0;padding:0;"> If you like use my plugin! Buy me ☕ </p>
     <input type="hidden" name="cmd" value="_s-xclick">
@@ -159,4 +161,11 @@
         }
 
     });
+</script>
+
+
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 </script>
