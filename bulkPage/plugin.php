@@ -14,7 +14,7 @@ class BulkPage extends Plugin
 			set_time_limit(0);
 		
 			$list = explode(",", $_POST['list']);
-			$removedDuplicate = $list;
+			$removedDuplicate = array_unique($list);
 
 
 			if ($_POST['option'] == 'pages') {
@@ -49,25 +49,31 @@ class BulkPage extends Plugin
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
 					$arg['category'] = $_POST['categories'];
-                	$arg['slug'] = $arg['title'];
+                 
+                
 					global $pages;
-
 
 					$titleList = array();
 
 					foreach ($pages->db as $key => $value) {
-						array_push($titleList, strtolower($value['title']));
-
+						array_push($titleList, $value['title']);
 					};
+					
 
-
-
-					if (in_array(strtolower($arg['title']), $titleList)) {
+					if (in_array($arg['title'], $titleList)) {
 						echo '<div class="alert alpage alert-danger">Page with title ' . $arg['title'] . ' exist!</div>';
 					} elseif ($arg['title'] == 'no-title') {
 						echo '<div class="alert alpage alert-danger">Page empty!</div>';
 						
 					} else {
+					    
+					    $sluger = $pages->generateKey($arg['title'],$parent=true, $returnSlug=true, $oldKey='');
+					    
+					    if(file_exists(PATH_PAGES.$sluger)){
+					     unlink(PATH_PAGES.$sluger.'/index.txt');
+					       rmdir(PATH_PAGES.$sluger.'/');
+					    };
+					    
  						createPage($arg);
 						$countBulk++;
 						$countPost = $countBulk;
