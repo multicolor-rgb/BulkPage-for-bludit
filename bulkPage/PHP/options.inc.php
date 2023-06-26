@@ -6,7 +6,7 @@
 
 
 
-<form method="POST">
+<form class="former" method="POST" action="<?php echo DOMAIN_ADMIN.'plugin/bulkpage?done';?>">
 
     <select name="option" class="form-control mb-2">
         <option value="pages">Pages</option>
@@ -99,10 +99,13 @@
 
     </div>
 
-    <input type="submit" class="btn btn-primary mt-2">
+    <input type="submit" class="btn btn-primary mt-2 ajaxSend">
 </form>
 
 
+<div class="alertcontainer">
+
+        </div>
 
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="box-sizing:border-box;display:grid; width:100%;grid-template-columns:1fr auto; padding:10px;background:#fafafa;border:solid 1px #ddd;margin-top:20px;">
@@ -163,9 +166,4 @@
     });
 </script>
 
-
-<script>
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
-}
-</script>
+ 

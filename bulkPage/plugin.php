@@ -10,8 +10,9 @@ class BulkPage extends Plugin
 
 		// Check if the form was sent
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+			$countBulk = 0;
 			set_time_limit(0);
+		
 			$list = explode(",", $_POST['list']);
 			$removedDuplicate = array_unique($list);
 
@@ -19,6 +20,9 @@ class BulkPage extends Plugin
 			if ($_POST['option'] == 'pages') {
 
 				foreach ($removedDuplicate  as $key => $value) {
+
+ 
+					
 					$arg = [];
 
 					if ($value[0] == ' ') {
@@ -45,6 +49,7 @@ class BulkPage extends Plugin
 					$arg['type'] = $_POST['type'];
 					$arg['parent'] = $_POST['parents'];
 					$arg['category'] = $_POST['categories'];
+					$arg['slug'] = $arg['title'];
 
 					global $pages;
 
@@ -53,6 +58,7 @@ class BulkPage extends Plugin
 
 					foreach ($pages->db as $key => $value) {
 						array_push($titleList, $value['title']);
+
 					};
 
 
@@ -61,29 +67,28 @@ class BulkPage extends Plugin
 						echo '<div class="alert alpage alert-danger">Page with title ' . $arg['title'] . ' exist!</div>';
 					} elseif ($arg['title'] == 'no-title') {
 						echo '<div class="alert alpage alert-danger">Page empty!</div>';
+						
 					} else {
+
 						createPage($arg);
+						$countBulk++;
+						$countPost = $countBulk;
+						$_POST['countPost'] = $countPost;
 
 						Alert::set('Pages added', ALERT_STATUS_OK);
 					};
-
-
-					echo '<script>
-					
-					setTimeout(()=>{
-
-					if(document.querySelector(".alpage")!==null){
-
-					document.querySelectorAll(".alpage").forEach(x=>{
-					x.classList.add("d-none");
-					})
 				
+
+					if ((int)$key > 0 && (int)$key % 10 == 0) {
+						sleep(5);
+					echo '<script>alert("please wait,script still loading")</script>';	 
 					};
 
-				},1500);
-					
-					</script>';
 				};
+
+			};
+
+			
 			};
 
 
@@ -94,7 +99,9 @@ class BulkPage extends Plugin
 					createCategory($arg);
 				};
 			};
-		}
+
+
+		 
 	}
 
 	public function adminView()
@@ -107,7 +114,14 @@ class BulkPage extends Plugin
 		global $site;
 		$title = $site->title();
 
-		include($this->phpPath() . 'PHP/options.inc.php');
+
+	
+		if(isset($_GET['done'])){
+			include($this->phpPath() . 'PHP/workinprogress.php');
+		}else{
+			include($this->phpPath() . 'PHP/options.inc.php');
+		}
+
 	}
 
 	public function adminSidebar()
